@@ -5,6 +5,8 @@ import pygame
 # import the constants variable from constants.py
 from constants import *
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     pygame.init()
@@ -14,10 +16,12 @@ def main():
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-
-    print(updatable)
+    asteroidfield = AsteroidField()
 
     while True:
         # Check if players pressed the X in the corner. 
@@ -25,12 +29,10 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        # player.update(dt)
         for object in updatable:
             object.update(dt)
 
         screen.fill((0, 0, 0)) # RGB value for black.
-        # player.draw(screen)
         for object in drawable:
             object.draw(screen)
         pygame.display.flip()
