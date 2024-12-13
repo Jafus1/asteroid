@@ -31,9 +31,18 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
+        # Run all update from everything in the updatable group.
         for object in updatable:
             object.update(dt)
 
+        # Perform a collision check between every bullet and every asteroid. 
+        for object in asteroids:
+            for shot in shots:
+                if (object.collision(shot)):
+                    object.kill()
+                    shot.kill()
+
+        # Perform a collision check between the player and every asteroid. 
         for object in asteroids:
             if (object.collision(player)):
                 print("Game over!")
