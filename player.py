@@ -49,6 +49,8 @@ class Player(CircleShape):
             self.move(-dt)
         if keys[pygame.K_SPACE]:
             self.shoot(dt)
+        if keys[pygame.K_ESCAPE]:
+            exit()
 
 class Shot(CircleShape):
     containers = None
